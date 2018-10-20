@@ -422,7 +422,7 @@ int clienteMasAlquileres(eAlquileres* listaAlquileres, int lenAlquileres, eClien
     return retorno;
 }
 
-///Listar todos los clientes que alquilaron un juego determinado.
+///Listar todos los clientes que alquilaron un juego determinado. REVISAR
 int clientesQueAlquilaronJuegoDeterminado(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
 {
     int retorno=-1;
@@ -495,7 +495,7 @@ int clientesQueAlquilaronJuegoDeterminado(eAlquileres* listaAlquileres, int lenA
 }*/
 
 
-///Listar todos los juegos alquilados en una fecha determinada
+///Listar todos los juegos alquilados en una fecha determinada REVISAR
 int juegoAlquiladosEnFechaDeterminada(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
 {
     int retorno=-1;
