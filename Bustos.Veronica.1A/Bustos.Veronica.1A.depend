@@ -53,7 +53,7 @@
 	<time.h>
 	<string.h>
 
-1539912717 source:c:\users\fvg\desktop\bustos.veronica.1a\alquileres.c
+1539990872 source:c:\users\fvg\desktop\bustos.veronica.1a\alquileres.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -63,7 +63,7 @@
 	"juegos.h"
 	<limits.h>
 
-1539912608 c:\users\fvg\desktop\bustos.veronica.1a\alquileres.h
+1540044779 c:\users\fvg\desktop\bustos.veronica.1a\alquileres.h
 	"alquileres.h"
 	"utn.h"
 	"clientes.h"
@@ -92,7 +92,7 @@
 	"juegos.h"
 	"utn.h"
 
-1539833163 source:c:\users\fvg\desktop\bustos.veronica.1a\main.c
+1539917716 source:c:\users\fvg\desktop\bustos.veronica.1a\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

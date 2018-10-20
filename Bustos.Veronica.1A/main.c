@@ -168,8 +168,12 @@ int main()
         case 12:
             ///Hacer informes, mostradolos a todos
             system("cls");
-           informes(alquileres, ALQ, juegosInfantiles, JUE, clientes, CLI);
-           //clienteMasAlquileres(alquileres, ALQ, clientes, CLI);
+            informes(alquileres, ALQ, juegosInfantiles, JUE, clientes, CLI);
+           /* printf("El importe de juego mas alto es :");
+           juegoMasImporte(juegosInfantiles, JUE);
+           printf("El juego con mas alquileres es : ");
+           juegosMasAlquileres(alquileres, ALQ, juegosInfantiles, JUE);*/
+           //ordenarClientesPorInsercion(clientes, CLI);
             system("pause");
 
             break;
@@ -194,7 +198,7 @@ int main()
  *F) Listar el/los clientes que realizo mas alquileres ECHO
  *G) Listar todos los juegos alquilados en una fecha determinada.
  *H) Listar todos los clientes que realizaron al menos un alquiler en una fecha determinada.
- *I) Listar todos los juegos ordenados por Importe(descendente), utilizando METODO DE BURBUJEO MAS EFICIENTE. ECHO
+ *I) Listar todos los juegos ordenados por Importe(descendente), utilizando METODO DE BURBUJEO MAS EFICIENTE.
  *J) Listar todos los clientees ordenados por Apellido(ascendente) , utilizando el metodo de insercion.
  */
 

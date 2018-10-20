@@ -217,9 +217,9 @@ void hardcodearAlquileres(eAlquileres alquileres[])
     int i;
     eAlquileres vecHard[] =
     {
-        {1, 1, 2, {30, 4, 2018}, 0},
-        {2, 3, 3, {30, 4, 2018}, 0},
-        {3, 3, 3, {20, 4, 2018}, 0},
+        {1, 1, 2, {30, 5, 2010}, 0},
+        {2, 3, 3, {30, 10, 2018}, 0},
+        {3, 3, 3, {20, 6, 2018}, 0},
         {4, 2, 2, {30, 4, 2018}, 0},
         {5, 2, 5, {30, 4, 2018}, 0}
     };
@@ -230,8 +230,102 @@ void hardcodearAlquileres(eAlquileres alquileres[])
     }
 }
 
+///Promedio y total de los Importes de los juegos alquilados
+int promedioYTotalImporteJuegos(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos)
+{
+    float suma=0;
+    float promedio;
+    int i, j;
+    int retorno=-1;
+    int contadorAlquileres=0;
+    //  int contadorSuperanElpromedio=0;
+
+    if(listaAlquileres!=NULL &&listaJuegos!=NULL)
+    {
+        for( i=0 ; i<lenAlquileres ; i++)
+        {
+            for(j=0; j<lenJuegos ; j++)
+            {
+                if(listaAlquileres[i].codigoJuego == listaJuegos[j].codigoJuego && listaAlquileres[i].isEmpty == 0 && listaJuegos[j].isEmpty == 0)
+                {
+                    suma = suma + listaJuegos[i].importe;
+                    contadorAlquileres ++;
+                    promedio= suma / contadorAlquileres;
+                }
+            }
+
+        }
+        /*      for( i=0; i<len ; i++)
+        {
+          if(lista[i].isEmpty == 0)
+          {
+              if(lista[i].salary> promedio)
+              {
+                  contadorSuperanElpromedio ++;
+              }
+          }
+
+        }*/
+
+
+        printf("La suma es %.3f --- El promedio es %f \n", suma, promedio);
+        retorno=0;
+    }
+
+    return retorno;
+}
+
+///La cantidad de juegos cuyo Importe NO superan el promedio anterior
+int juegosQueNosSuperanPromedio(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos)
+{
+    float suma=0;
+    float promedio;
+    int i, j;
+    int retorno=-1;
+    int contadorAlquileres=0;
+    int contadorSuperanElpromedio=0;
+
+    if(listaAlquileres!=NULL &&listaJuegos!=NULL)
+    {
+        for( i=0 ; i<lenAlquileres ; i++)
+        {
+            for(j=0; j<lenJuegos ; j++)
+            {
+                if(listaAlquileres[i].codigoJuego == listaJuegos[j].codigoJuego && listaAlquileres[i].isEmpty == 0 && listaJuegos[j].isEmpty == 0)
+                {
+                    suma = suma + listaJuegos[i].importe;
+                    contadorAlquileres ++;
+                    promedio= suma / contadorAlquileres;
+                }
+            }
+
+        }
+        for( i=0 ; i<lenAlquileres ; i++)
+        {
+            for(j=0; j<lenJuegos ; j++)
+            {
+                if(listaAlquileres[i].codigoJuego == listaJuegos[j].codigoJuego && listaAlquileres[i].isEmpty == 0 && listaJuegos[j].isEmpty == 0)
+                {
+                    if(listaJuegos[j].importe< promedio)
+                    {
+                        contadorSuperanElpromedio ++;
+                    }
+                }
+            }
+
+
+        }
+
+        printf("La cantidad de juegos cuyo Importe NO superan el promedio anterior es %d \n", contadorSuperanElpromedio);
+        retorno=0;
+    }
+
+    return retorno;
+}
+
+
 ///El juego con menos alquileres
-int juegosMenosAlquileros(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos)
+int juegosMenosAlquileres(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos)
 {
     int retorno=-1;
     int i, j; //uno nunca sabe
@@ -251,7 +345,7 @@ int juegosMenosAlquileros(eAlquileres* listaAlquileres, int lenAlquileres, eJueg
                     acumuladorCliente++;
                 }
             }
-            if(flagPrimeraPasada || (acumuladorCliente < cantidadClientesMin && acumuladorCliente!=0 ))
+            if(flagPrimeraPasada || (acumuladorCliente < cantidadClientesMin && acumuladorCliente!=0 )) //Preguntar
             {
                 flagPrimeraPasada = 0;
                 cantidadClientesMin=acumuladorCliente;
@@ -328,6 +422,116 @@ int clienteMasAlquileres(eAlquileres* listaAlquileres, int lenAlquileres, eClien
     return retorno;
 }
 
+///Listar todos los clientes que alquilaron un juego determinado.
+int clientesQueAlquilaronJuegoDeterminado(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
+{
+    int retorno=-1;
+    int i, j, codigoJuego;
+    mostrarTodosLosJuegos(listaJuegos, lenJuegos);
+    printf("\nIngrese el codigo: ");
+    scanf("%d",&codigoJuego);
+    int indiceJuego = buscarJuegoPorId(listaJuegos, lenJuegos, codigoJuego);
+    if (indiceJuego == -1)
+    {
+        printf("\nNo existe el codigo.\n\n");
+    }
+    else{
+        for (i=0; i<lenAlquileres; i++){
+            if (listaAlquileres[i].isEmpty == 0){
+                if (codigoJuego == listaAlquileres[i].codigoJuego){
+                    for (j=0; j<lenCliente; j++){
+                        if (listaAlquileres[i].codigoCliente == listaCliente[j].codigoCliente){
+                            mostrarUnCliente(listaCliente, listaCliente[j].codigoCliente);
+                            retorno=0;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    return retorno;
+}
+/*{
+    int retorno=-1;
+    int id, i, j;
+    int buscarJuego;
+
+    if(listaAlquileres!= NULL && listaCliente!=NULL && listaJuegos!=NULL)
+    {
+        mostrarTodosLosJuegos(listaJuegos, lenJuegos); //Muestro todos los juegos
+        printf("Ingrese el id del juego :");
+        scanf("%d",&id);
+      //  int acumuladorCliente;
+        buscarJuego = buscarJuegoPorId(listaJuegos, lenJuegos, id); //Se busca el id de juego para comprobar si un cliente lo alquilo
+
+        if(buscarJuego == -1) //Si la anterior funcion devuelve -1 es porque no se encontro el id (no existe)
+        {
+            printf("Ese id no existe!\n");
+        }
+        else
+        {
+            for(i=0; i<lenAlquileres; i++) //De lo contrario, recorro la lista de alquileres
+            {
+                //acumuladorCliente=0;
+                if(listaAlquileres[i].isEmpty==0 && listaAlquileres[i].codigoJuego == buscarJuego)//Busco el codigo y verifico que se alquilo
+                {
+                    for(j=0; j<lenCliente; j++)
+                    {
+                        if((listaAlquileres[i].codigoCliente == listaCliente[j].codigoCliente) && listaCliente[j].isEmpty ==0)
+                        {
+                           // acumuladorCliente ++;
+                            mostrarUnCliente(listaCliente, listaCliente[j].codigoCliente);
+                            retorno=0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return retorno;
+}*/
+
+
+///Listar todos los juegos alquilados en una fecha determinada
+int juegoAlquiladosEnFechaDeterminada(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
+{
+    int retorno=-1;
+    int dia, mes, anio;
+    int i,j;
+
+    if(listaAlquileres!=NULL  && listaCliente!=NULL &&  listaJuegos!=NULL)
+    {
+        printf("Ingrese eldia en que fue alquilado el juego: ");
+        scanf("%d",&dia);
+        printf("ingrese mes ");
+        scanf("%d",&mes);
+        printf("ingrese anio");
+        scanf("%d",&anio);
+
+        for(i=0; i<lenAlquileres ; i++)
+        {
+            if(listaAlquileres[i].fechaIngreso.dia == dia && listaAlquileres[i].fechaIngreso.mes == mes && listaAlquileres[i].fechaIngreso.anio == anio && listaAlquileres[i].isEmpty == 0)
+            {
+                for(j=0; j<lenJuegos; j++)
+                {
+                    if(listaJuegos[j].codigoJuego == listaAlquileres[i].codigoJuego && listaJuegos[j].isEmpty == 0)
+                    {
+                        mostrarUnJuego(listaJuegos, listaJuegos[j].codigoJuego);
+                        retorno=0;
+                    }
+                }
+
+            }
+        }
+
+    }
+    return retorno;
+}
+
+
 ///Mostrar alquileres por importe y apellido
 int mostrarAlquileresConImporteYApellido(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
 {
@@ -373,6 +577,29 @@ int juegoMasImporte(eJuegos* lista, int len)
     return retorno;
 }
 
+///Listar todos los juegos ordenados por Importe(descendente), utilizando METODO DE BURBUJEO MAS EFICIENTE
+
+void listarJuegoPorBurbujeoDescendente(eJuegos *listaJuegos, int lenJuegos)
+{
+    eJuegos auxiliarJuegos;
+    int j, banderaOrdenado = 1;
+    while(banderaOrdenado ==1){
+        banderaOrdenado = 0;
+        for (j=1; j<lenJuegos;j++){
+            if (listaJuegos[j].importe > listaJuegos[j-1].importe)
+            {
+                auxiliarJuegos = listaJuegos[j]; //Estoy cambiando la poscicion de cada uno
+                listaJuegos[j] = listaJuegos[j-1];
+                listaJuegos[j-1] = auxiliarJuegos;
+                banderaOrdenado = 1;
+            }
+        }
+    }
+    mostrarTodosLosJuegos(listaJuegos , lenJuegos);
+    system("pause");
+}
+
+
 ///Metodo de insercion en clientes por apellido ascendente
 void ordenarClientesPorInsercion(eCliente *pClientes, int largoClientes)
 {
@@ -414,44 +641,53 @@ void informes(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJue
         printf("9)Listar todos los juegos ordenados por Importe(descendente), utilizando METODO DE BURBUJEO MAS EFICIENTE.\n");
         printf("10)Listar todos los clientees ordenados por Apellido(ascendente) , utilizando el metodo de insercion.\n");
         printf("11. Salir");
-        printf("\n\nElija una opcion");
+        printf("\n\nElija una opcion: ");
         scanf("%d",&opcion);
 
         switch(opcion)
         {
         case 1:
-
-
+            promedioYTotalImporteJuegos(listaAlquileres, lenAlquileres, listaJuegos,lenJuegos);
+            system("pause");
+            system("cls");
             break;
         case 2:
-
-
+            juegosQueNosSuperanPromedio(listaAlquileres, lenAlquileres,listaJuegos,lenJuegos);
+            system("pause");
+            system("cls");
             break;
         case 3:
+            clientesQueAlquilaronJuegoDeterminado(listaAlquileres, lenAlquileres,listaJuegos,lenJuegos,listaCliente,lenCliente );
 
             break;
         case 4:
 
             break;
         case 5:
-           juegosMenosAlquileros(listaAlquileres, lenAlquileres, listaJuegos, lenJuegos);
-           system("pause");
-           system("cls");
+            juegosMenosAlquileres(listaAlquileres, lenAlquileres, listaJuegos, lenJuegos);
+            system("pause");
+            system("cls");
             break;
         case 6:
             clienteMasAlquileres(listaAlquileres, lenAlquileres, listaCliente, lenCliente);
+            system("pause");
+            system("cls");
             break;
         case 7:
-
+            juegoAlquiladosEnFechaDeterminada(listaAlquileres,  lenAlquileres, listaJuegos, lenJuegos, listaCliente, lenCliente );
             break;
         case 8:
 
             break;
         case 9:
-
+            listarJuegoPorBurbujeoDescendente(listaJuegos, lenJuegos);
+            system("pause");
+            system("cls");
             break;
         case 10:
-
+            ordenarClientesPorInsercion(listaCliente, lenCliente);
+            system("pause");
+            system("cls");
             break;
         case 11:
             system("cls");
