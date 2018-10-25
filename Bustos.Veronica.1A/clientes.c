@@ -134,7 +134,7 @@ void hardcodearClientes(eCliente clientes[])
     eCliente vecHard[] = {
         {1, "Gimenez", "Mabel", 'f', "Arieta 5263", 0},
         {2, "Perez", "Carlos", 'm', "Santa Maria 15", 0},
-        {3, "Rios", "Cristian", 'f', "Condarco 2155", 0},
+        {3, "Rios", "Cristian", 'm', "Condarco 2155", 0},
         {4, "Suarez", "Maria Monica Mabel", 'f', "Arieta 4222", 0},
         {5, "De Pedro", "Roberto", 'm', "Aguapey 4237", 0}
     };
