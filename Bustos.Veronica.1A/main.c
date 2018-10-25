@@ -8,8 +8,7 @@
 #define CLI 1000
 #include "alquileres.h"
 #define ALQ 1000 //Se cambio
-
-void informes(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente );
+#include "informes.h"
 
 int main()
 {
@@ -190,89 +189,6 @@ int main()
     while(seguir == 's');
 
     return 0;
-}
-
-void informes(eAlquileres* listaAlquileres, int lenAlquileres, eJuegos* listaJuegos,int lenJuegos,eCliente* listaCliente,int lenCliente )
-{
-    char continuar= 's';
-    int opcion;
-
-    do
-    {
-        printf("--------------------INFORMES--------------------\n\n");
-        printf("1)Promedio y total de los Importes de los juegos alquilados.\n");
-        printf("2)La cantidad de juegos cuyo Importe NO superan el promedio anterior.\n");
-        printf("3)Listar todos los clientes que alquilaron un juego determinado.\n");
-        printf("4)Listar todos los juegos que fueron alquilados por un cliente determinado.\n");
-        printf("5)Listar el/los juego/s menos alquilado/s.\n");
-        printf("6)Listar el/los clientes que realizo mas alquileres.\n");
-        printf("7)Listar todos los juegos alquilados en una fecha determinada.\n");
-        printf("8)Listar todos los clientes que realizaron al menos un alquiler en una fecha determinada.\n");
-        printf("9)Listar todos los juegos ordenados por Importe(descendente), utilizando METODO DE BURBUJEO MAS EFICIENTE.\n");
-        printf("10)Listar todos los clientees ordenados por Apellido(ascendente) , utilizando el metodo de insercion.\n");
-        printf("11. Salir");
-        printf("\n\nElija una opcion: ");
-        scanf("%d",&opcion);
-
-        switch(opcion)
-        {
-        case 1:
-            promedioYTotalImporteJuegos(listaAlquileres, lenAlquileres, listaJuegos,lenJuegos);
-            system("pause");
-            system("cls");
-            break;
-        case 2:
-            juegosQueNosSuperanPromedio(listaAlquileres, lenAlquileres,listaJuegos,lenJuegos);
-            system("pause");
-            system("cls");
-            break;
-        case 3:
-            clientesQueAlquilaronJuegoDeterminado(listaAlquileres, lenAlquileres,listaJuegos,lenJuegos,listaCliente,lenCliente );
-            system("pause");
-            system("cls");
-            break;
-        case 4:
-            juegosQueFueronAlquiladosPorClienteDeterminado(listaAlquileres, lenAlquileres, listaJuegos, lenJuegos, listaCliente, lenCliente );
-            system("pause");
-            system("cls");
-            break;
-        case 5:
-            juegosMenosAlquileres(listaAlquileres, lenAlquileres, listaJuegos, lenJuegos);
-            system("pause");
-            system("cls");
-            break;
-        case 6:
-            clienteMasAlquileres(listaAlquileres, lenAlquileres, listaCliente, lenCliente);
-            system("pause");
-            system("cls");
-            break;
-        case 7:
-            juegoAlquiladosEnFechaDeterminada(listaAlquileres,  lenAlquileres, listaJuegos, lenJuegos, listaCliente, lenCliente );
-            break;
-        case 8:
-
-            break;
-        case 9:
-            listarJuegoPorBurbujeoDescendente(listaJuegos, lenJuegos);
-            system("pause");
-            system("cls");
-            break;
-        case 10:
-            ordenarClientesPorInsercion(listaCliente, lenCliente);
-            system("pause");
-            system("cls");
-            break;
-        case 11:
-            system("cls");
-            continuar='n';
-            break;
-        default:
-            printf("Opcion no valida");
-        }
-
-    }
-    while(continuar == 's' || continuar == 'S');
-
 }
 
 /*---------------INFORMES--------------------
